@@ -1,9 +1,19 @@
 import { Button, TextField } from "@mui/material";
-import logoDark from "./logo-dark.svg";
-import logoLight from "./logo-light.svg";
+import { useState } from "react";
 import theStretch from "./thestretch.png";
 
 export function Welcome() {
+  const [formData, setFormData] = useState({
+    planUntil: "",
+    howMuchToSpend: "",
+    howManyInHousehold: "",
+  });
+
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  }
+
   return (
     <div>
       <div className="flex flex-row gap-5 m-4">
@@ -16,29 +26,29 @@ export function Welcome() {
           name="planUntil"
           variant="outlined"
           margin="normal"
-        // value={formData.name}
-        // onChange={handleChange}
+          value={formData.planUntil}
+          onChange={handleChange}
         />
         <TextField
           label="How much to spend"
           name="howMuchToSpend"
           variant="outlined"
           margin="normal"
-        // value={formData.name}
-        // onChange={handleChange}
+          value={formData.howMuchToSpend}
+          onChange={handleChange}
         />
         <TextField
           label="How many in household"
           name="howManyInHousehold"
           variant="outlined"
           margin="normal"
-        // value={formData.name}
-        // onChange={handleChange}
+          value={formData.howManyInHousehold}
+          onChange={handleChange}
         />
         <Button variant="contained" color="primary">
           Additional Options
         </Button>
-        <Button variant="contained" color="primary">
+        <Button variant="contained" color="primary" onClick={() => console.log(formData)}>
           Plan!
         </Button>
       </form>
